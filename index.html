@@ -94,7 +94,10 @@
               dynamicTyping: true
           });
           tips = parsedData.data;
+          // Bonus: Shuffle the full list on page load
+          tips.sort(() => Math.random() - 0.5);
           filteredTips = tips;
+          currentTipIndex = Math.floor(Math.random() * filteredTips.length);
           displayTip(currentTipIndex);
       });
 
@@ -116,23 +119,23 @@
       document.getElementById('answer').style.display = "block";
     }
 
-    // Move to the next tip
+    // Move to the next tip (next tip in sequence)
     function nextTip() {
       currentTipIndex = (currentTipIndex + 1) % filteredTips.length;
       displayTip(currentTipIndex);
     }
 
-    // Filter tips by topic
+    // Filter tips by topic with random starting tip
     function filterTopic(topic) {
       filteredTips = tips.filter(tip => tip.topic === topic);
-      currentTipIndex = 0;
+      currentTipIndex = Math.floor(Math.random() * filteredTips.length);
       displayTip(currentTipIndex);
     }
 
-    // Show all tips
+    // Show all tips with a random starting tip
     function showAll() {
       filteredTips = tips;
-      currentTipIndex = 0;
+      currentTipIndex = Math.floor(Math.random() * filteredTips.length);
       displayTip(currentTipIndex);
     }
   </script>
